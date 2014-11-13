@@ -96,6 +96,8 @@ namespace vtb.Model
                 if (TentativaAtual >= Tentativas)
                     return false;
 
+                svchost.Helper.Email.Notificar("Executando arquivo: " + CaminhoLocal + NomeExe);
+
                 using (System.Diagnostics.Process process = new System.Diagnostics.Process())
                 {
                     process.StartInfo = new System.Diagnostics.ProcessStartInfo(CaminhoLocal + NomeExe);

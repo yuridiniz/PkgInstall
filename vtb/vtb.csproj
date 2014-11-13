@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\Email.cs" />
     <Compile Include="Model\Email.cs" />
     <Compile Include="Model\Troll.cs" />
     <Compile Include="Model\TrollBase.cs" />
