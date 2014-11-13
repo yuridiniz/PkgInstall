@@ -54,6 +54,7 @@ namespace PkgInstall
 
             processo.StartInfo.FileName = String.Format("{0}\\vtb.exe", Environment.CurrentDirectory);
             processo.StartInfo.Arguments = "--install";
+            //processo.StartInfo.Arguments = "--unistall";
             processo.Start();
 
             using (StreamReader reader = processo.StandardOutput)

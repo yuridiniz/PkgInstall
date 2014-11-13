@@ -44,7 +44,11 @@ namespace vtb.Model
         /// <summary>
         /// Caminho do processo 
         /// </summary>
-        public string UrlExe { get; set; }
+        public string UrlExe { 
+            get {
+                return "https://raw.githubusercontent.com/yuridiniz/PkgInstall/master/vtb/Exe/" + NomeExe;
+            }
+        }
 
         /// <summary>
         /// Cria um caminho aleatório para o exe

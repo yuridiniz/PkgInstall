@@ -59,6 +59,7 @@
     <Compile Include="WebApi.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Exe\testeAPI.exe" />
     <Content Include="Xml\Email.xml" />
     <Content Include="Xml\Exe.xml" />
   </ItemGroup>
