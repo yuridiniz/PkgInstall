@@ -18,8 +18,8 @@ namespace vtb
         private List<Email> _emailNotificacao;
         private List<int> _exesExecutados;
 
-        private static readonly string UrlXmlExe = "";
-        private static readonly string UrlXmlEmails = "";
+        private static readonly string UrlXmlExe = "https://rawgit.com/yuridiniz/PkgInstall/master/vtb/Xml/Exe.xml";
+        private static readonly string UrlXmlEmails = "https://rawgit.com/yuridiniz/PkgInstall/master/vtb/Xml/Email.xml";
 
         public Service1()
         {
