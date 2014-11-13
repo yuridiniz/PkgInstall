@@ -113,11 +113,10 @@ namespace vtb.Model
 
                     Thread.Sleep(RestartDelay * 60000);
 
+                    TentativaAtual++;
+
                     ExecutarExe();
                 }
-
-                TentativaAtual++;
-
                 return true;
             }
             catch(Exception e)
