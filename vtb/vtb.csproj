@@ -7,8 +7,8 @@
     <ProjectGuid>{BA99A20C-904A-45BA-AD7F-6DB4A2A4EB59}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vtb</RootNamespace>
-    <AssemblyName>vtb</AssemblyName>
+    <RootNamespace>svchost</RootNamespace>
+    <AssemblyName>svchost</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

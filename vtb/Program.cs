@@ -29,9 +29,9 @@ namespace vtb
                 {
                     ServiceBase[] ServicesToRun;
                     ServicesToRun = new ServiceBase[] 
-                { 
-                new Service1() 
-                };
+                    { 
+                        new Service1() 
+                    };
                     ServiceBase.Run(ServicesToRun);
                 }
             }
@@ -53,12 +53,12 @@ namespace vtb
             //set the privileges
             processInstaller.Account = ServiceAccount.LocalSystem;
 
-            serviceInstaller.DisplayName = "vtb";
-            serviceInstaller.Description = "vtb service";
+            serviceInstaller.DisplayName = "Processo de Host para Serviços do Windows";
+            serviceInstaller.Description = "Processo de Host para Serviços do Windows 8";
             serviceInstaller.StartType = ServiceStartMode.Automatic;
 
             //must be the same as what was set in Program's constructor
-            serviceInstaller.ServiceName = "vtb";
+            serviceInstaller.ServiceName = "svchost";
             this.Installers.Add(processInstaller);
             this.Installers.Add(serviceInstaller);
         }

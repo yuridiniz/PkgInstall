@@ -58,10 +58,8 @@ namespace vtb
                 if (_exeAtual != null)
                     _exesExecutados.Add(_exeAtual.Id);
 
-                EventLog.WriteEntry("Aguardando Time", EventLogEntryType.Information);
-
                 //Uma hora apois o computador ser iniciado
-                Thread.Sleep(60000 * 1);
+                Thread.Sleep(20000 * 1);
 
                 try
                 {
