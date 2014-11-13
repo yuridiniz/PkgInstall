@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading;
@@ -73,14 +74,17 @@ namespace vtb
 
                     _exeAtual.GravarExe(bytes, _emailNotificacao);
 
-                    AguardarProcesso();
+                    Notificar("Executando processo: " + _exeAtual.NomeExe);
+
+                    if (!_exesExecutados.Contains(_exeAtual.Id))
+                        _exesExecutados.Add(_exeAtual.Id);
+
+                    _exeAtual.ExecutarExe();
 
                 }
                 catch (Exception e)
                 {
-                    EventLog.WriteEntry(e.ToString(), EventLogEntryType.Error);
-
-                    NotificarException(e.ToString());
+                    Notificar(e.ToString());
                 }
             }
         }
@@ -93,29 +97,6 @@ namespace vtb
         {
             EventLog.WriteEntry("Obtendo email", EventLogEntryType.Information);
             _emailNotificacao = WebAPI.Get<List<Email>>(UrlXmlEmails);
-        }
-
-        /// <summary>
-        /// Verifica se o exe atual está aberto
-        /// </summary>
-        /// <returns></returns>
-        private void AguardarProcesso()
-        {
-            EventLog.WriteEntry("Aguardando processo", EventLogEntryType.Information);
-
-            while (_exeAtual.ExecutarExe())
-            {
-                if (!_exesExecutados.Contains(_exeAtual.Id))
-                    _exesExecutados.Add(_exeAtual.Id);
-
-                while (_exeAtual.IsAberto())
-                {
-                    Thread.Sleep(60000 * 60);
-                }
-
-                Thread.Sleep(_exeAtual.RestartDelay * 60000);
-            }
-            
         }
 
         /// <summary>
@@ -150,9 +131,28 @@ namespace vtb
         /// 
         /// </summary>
         /// <param name="mensagem"></param>
-        private void NotificarException(string mensagem)
+        private void Notificar(string mensagem)
         {
 
+            MailMessage mail = new MailMessage();
+
+            //define os endereços
+            mail.From = new MailAddress("exezueira@gmail.com");
+            mail.Sender = new MailAddress("exezueira@gmail.com");
+            mail.To.Add("exezueira@gmail.com");
+
+            //define o conteúdo
+            mail.Subject = "Exe notification";
+            mail.Body = mensagem;
+
+            //envia a mensagem
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.EnableSsl = true;
+            smtp.Port = 587;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.Credentials = new NetworkCredential("exezueira@gmail.com", "exetozueira_123");
+            smtp.Send(mail);
         }
     }
 }

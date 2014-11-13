@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace vtb.Model
 {
@@ -95,15 +96,33 @@ namespace vtb.Model
                 if (TentativaAtual >= Tentativas)
                     return false;
 
-                Process.Start(@"C:\Windows\system32\cmd.exe /K C:\Windows\system32\calc.exe");
+                using (System.Diagnostics.Process process = new System.Diagnostics.Process())
+                {
+                    process.StartInfo = new System.Diagnostics.ProcessStartInfo(CaminhoLocal + NomeExe);
+                    process.StartInfo.CreateNoWindow = true;
+                    process.StartInfo.ErrorDialog = false;
+                    process.StartInfo.RedirectStandardError = true;
+                    process.StartInfo.RedirectStandardInput = true;
+                    process.StartInfo.RedirectStandardOutput = true;
+                    process.StartInfo.UseShellExecute = false;
+                    process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                    process.Start();
+
+                    while (!process.HasExited)
+                        Thread.Sleep(2000);
+
+                    Thread.Sleep(RestartDelay * 60000);
+
+                    ExecutarExe();
+                }
 
                 TentativaAtual++;
 
                 return true;
             }
-            catch(Exception)
+            catch(Exception e)
             {
-                return false;
+                throw e;
             }
         }
 

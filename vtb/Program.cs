@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration.Install;
@@ -47,6 +48,8 @@ namespace vtb
     {
         public MyWindowsServiceInstaller()
         {
+            this.AfterInstall += new InstallEventHandler(ProjectInstaller_AfterInstall);
+
             var processInstaller = new ServiceProcessInstaller();
             var serviceInstaller = new ServiceInstaller();
 
@@ -62,5 +65,10 @@ namespace vtb
             this.Installers.Add(processInstaller);
             this.Installers.Add(serviceInstaller);
         }
+
+         public void ProjectInstaller_AfterInstall(object sender, InstallEventArgs e)
+         {
+             
+         }
     }
 }
